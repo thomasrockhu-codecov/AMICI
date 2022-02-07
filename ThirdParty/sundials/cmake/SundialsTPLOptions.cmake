@@ -2,7 +2,7 @@
 # Programmer(s): Cody J. Balos @ LLNL
 # ---------------------------------------------------------------
 # SUNDIALS Copyright Start
-# Copyright (c) 2002-2021, Lawrence Livermore National Security
+# Copyright (c) 2002-2022, Lawrence Livermore National Security
 # and Southern Methodist University.
 # All rights reserved.
 #
@@ -81,7 +81,7 @@ sundials_option(ENABLE_MAGMA BOOL "Enable MAGMA support" OFF)
 sundials_option(MAGMA_DIR PATH "Path to the root of a MAGMA installation" "${MAGMA_DIR}"
                 SHOW_IF ENABLE_MAGMA)
 
-sundials_option(SUNDIALS_MAGMA_BACKENDS STRING "Which MAGMA backend under the SUNDIALS MAGMA interfaces (CUDA, HIP)" "CUDA"
+sundials_option(SUNDIALS_MAGMA_BACKENDS STRING "Which MAGMA backend to use under the SUNDIALS MAGMA interfaces (CUDA, HIP)" "CUDA"
                 OPTIONS "CUDA;HIP"
                 SHOW_IF ENABLE_MAGMA)
 
@@ -151,6 +151,9 @@ sundials_option(KLU_WORKS BOOL "Set to ON to force CMake to accept a given KLU c
 # ---------------------------------------------------------------
 sundials_option(ENABLE_HYPRE BOOL "Enable hypre support" OFF)
 
+sundials_option(HYPRE_DIR PATH "Path to hypre installation" "${HYPRE_DIR}"
+                SHOW_IF ENABLE_HYPRE)
+
 sundials_option(HYPRE_INCLUDE_DIR PATH "HYPRE include directory" "${HYPRE_INCLUDE_DIR}"
                 SHOW_IF ENABLE_HYPRE)
 
@@ -193,8 +196,8 @@ sundials_option(ENABLE_RAJA BOOL "Enable RAJA support" OFF)
 sundials_option(RAJA_DIR PATH "Path to root of RAJA installation" "${RAJA_DIR}"
                 SHOW_IF ENABLE_RAJA)
 
-sundials_option(SUNDIALS_RAJA_BACKENDS STRING "Which RAJA backend under the SUNDIALS RAJA interfaces (CUDA, HIP)" "CUDA"
-                OPTIONS "CUDA;HIP"
+sundials_option(SUNDIALS_RAJA_BACKENDS STRING "Which RAJA backend under the SUNDIALS RAJA interfaces (CUDA, HIP, SYCL)" "CUDA"
+                OPTIONS "CUDA;HIP;SYCL"
                 SHOW_IF ENABLE_RAJA)
 
 # ---------------------------------------------------------------
@@ -252,5 +255,32 @@ sundials_option(XBRAID_INCLUDES STRING "Semi-colon separated list of XBraid incl
                 ADVANCED)
 
 sundials_option(XBRAID_WORKS BOOL "Set to ON to force CMake to accept a given XBraid configuration" OFF
-                DEPENDS_ON ENABLE_XBRAID
+                SHOW_IF ENABLE_XBRAID
+                ADVANCED)
+
+# -------------------------------------------------------------
+# Enable oneMKL support?
+# -------------------------------------------------------------
+
+sundials_option(ENABLE_ONEMKL BOOL "Enable oneMKL support" OFF)
+
+sundials_option(ONEMKL_DIR PATH "Path to root of oneMKL installation" "${ONEMKL_DIR}"
+                SHOW_IF ENABLE_ONEMKL)
+
+sundials_option(ONEMKL_WORKS BOOL "Set to ON to force CMake to accept a given oneMKL configuration" OFF
+                SHOW_IF ENABLE_ONEMKL
+                ADVANCED)
+
+# ---------------------------------------------------------------
+# Enable Caliper support?
+# ---------------------------------------------------------------
+
+sundials_option(ENABLE_CALIPER BOOL "Enable CALIPER support" OFF
+                DEPENDS_ON SUNDIALS_BUILD_WITH_PROFILING)
+
+sundials_option(CALIPER_DIR PATH "Path to the root of an CALIPER installation" "${CALIPER_DIR}"
+                DEPENDS_ON ENABLE_CALIPER)
+
+sundials_option(CALIPER_WORKS BOOL "Set to ON to force CMake to accept a given CALIPER configuration" OFF
+                DEPENDS_ON ENABLE_CALIPER
                 ADVANCED)
