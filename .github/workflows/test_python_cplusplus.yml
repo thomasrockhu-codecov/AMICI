@@ -106,7 +106,7 @@ jobs:
     - name: Codecov Python
       uses: codecov/codecov-action@v3
       with:
-        file: ./build/coverage_py.xml
+        files: ./build/coverage_py.xml
         flags: python
         fail_ci_if_error: true
 
@@ -123,7 +123,7 @@ jobs:
     - name: Codecov CPP
       uses: codecov/codecov-action@v3
       with:
-        file: ./coverage.info
+        files: ./coverage.info
         flags: cpp
         fail_ci_if_error: true
 

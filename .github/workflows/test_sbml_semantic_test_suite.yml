@@ -55,6 +55,6 @@ jobs:
     - name: Codecov SBMLSuite
       uses: codecov/codecov-action@v3
       with:
-        file: ./coverage_SBMLSuite.xml
+        files: ./coverage_SBMLSuite.xml
         flags: sbmlsuite
         fail_ci_if_error: true
