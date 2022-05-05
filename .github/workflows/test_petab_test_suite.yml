@@ -81,8 +81,14 @@ jobs:
           && AMICI_PARALLEL_COMPILE=2 pytest -v \
             --cov-report=xml --cov-append --cov=amici tests/petab_test_suite/
 
+      - name: coverage xml file
+        run: |
+          ls
+          cat ./coverage.xml
+
       - name: Codecov
         uses: codecov/codecov-action@v3
         with:
-          files: ./coverage.xml
+          files: coverage.xml
           flags: petab
+          verbose: true

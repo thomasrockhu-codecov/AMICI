@@ -108,6 +108,7 @@ jobs:
       with:
         files: ./build/coverage_py.xml
         flags: python
+        verbose: true
 
     - name: lcov
       run: |
@@ -124,6 +125,7 @@ jobs:
       with:
         files: ./coverage.info
         flags: cpp
+        verbose: true
 
     - name: Run sonar-scanner
       env:
